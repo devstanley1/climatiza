@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ClimaPro - Atendimento</title>
+    <script>
+        const theme = localStorage.getItem('theme') || 'dark';
+        document.documentElement.setAttribute('data-theme', theme);
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <link rel="stylesheet" href="../assets/css/style.css">
+</head>
+
+<body>
+    <div class="app-container">
+
+        <header class="mobile-header">
+            <div class="mobile-brand">
+                <i class="ph ph-snowflake" style="color: var(--role-atendimento);"></i>
+                <span>Clima<span style="color: var(--accent-blue-ice);">Pro</span> - SAC</span>
+            </div>
+            <button class="menu-toggle" id="menuToggle" aria-label="Abrir Menu">
+                <i class="ph ph-list"></i>
+            </button>
+        </header>
+
+        <div class="sidebar-overlay" id="sidebarOverlay"></div>
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <div class="sidebar-brand">
+                    <i class="ph ph-headset" style="color: var(--role-atendimento);"></i>
+                    <span>Atendimento</span>
+                </div>
+                <button class="close-sidebar" id="closeSidebar" aria-label="Fechar Menu">
+                    <i class="ph ph-x"></i>
+                </button>
+            </div>
+
+            <div class="sidebar-user">
+                <div class="user-avatar" style="color: var(--role-atendimento);">
+                    <i class="ph ph-user-circle"></i>
+                </div>
+                <div class="user-info">
+                    <h4>Maria Silva</h4>
+                    <span class="user-role"
+                        style="background: rgba(139, 92, 246, 0.1); color: var(--role-atendimento);">Despachante</span>
+                </div>
+            </div>
+
+            <nav class="sidebar-menu">
+                <div class="menu-label">Gestão</div>
+                <a href="#" class="menu-item active" data-tab="tab-fila">
+                    <i class="ph ph-headset"></i> Painel de Despacho
+                </a>
+                <a href="#" class="menu-item" data-tab="tab-clientes">
+                    <i class="ph ph-users"></i> Clientes
+                </a>
+                <a href="#" class="menu-item" data-tab="tab-agenda">
+                    <i class="ph ph-calendar-blank"></i> Agendamentos
+                </a>
+
+                <div class="sidebar-footer">
+                    <a href="../index.html" class="menu-item logout-btn">
+                        <i class="ph ph-sign-out"></i> Sair do Sistema
+                    </a>
+                </div>
+            </nav>
+        </aside>
+
+        <main class="app-main">
+            <div class="top-bar">
+                <button id="themeToggle" class="theme-btn" aria-label="Alternar Tema">
+                    <i class="ph ph-moon dark-icon"></i>
+                    <i class="ph ph-sun light-icon"></i>
+                </button>
+            </div>
+
+            <div class="page-content">
+                <div class="dash-header">
+                    <h2>Central de Atendimento</h2>
+                    <p class="text-secondary">Gerencie a fila de chamados, distribua as rotas e agende PMOCs.</p>
+                </div>
+
+                <nav class="tabs-nav">
+                    <button class="tab-btn active" data-tab="tab-fila"><i class="ph ph-list-bullets"></i> Fila de
+                        Chamados</button>
+                    <button class="tab-btn" data-tab="tab-clientes"><i class="ph ph-address-book"></i> Clientes
+                        Ativos</button>
+                    <button class="tab-btn" data-tab="tab-agenda"><i class="ph ph-calendar-blank"></i>
+                        Agendamentos</button>
+                </nav>
+
+                <!-- Conteúdo: Fila de Chamados -->
+                <div id="tab-fila" class="tab-content active">
+                    <div
+                        style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem;">
+                        <input type="text" placeholder="Buscar OS..."
+                            style="background: var(--input-bg); border: 1px solid var(--input-border); padding: 0.75rem 1rem; border-radius: 8px; color: var(--text-primary); width: 300px;">
+                        <button class="btn-primary" style="width: auto; padding: 0.75rem 1.5rem;"><i
+                                class="ph ph-plus"></i> Nova OS</button>
+                    </div>
+
+                    <div class="card" style="padding: 0; overflow-x: auto;">
+                        <table style="width: 100%; text-align: left; border-collapse: collapse; min-width: 800px;">
+                            <thead style="border-bottom: 1px solid var(--border-glass); background: rgba(0,0,0,0.2);">
+                                <tr>
+                                    <th style="padding: 1rem; color: var(--text-secondary);">OS</th>
+                                    <th style="padding: 1rem; color: var(--text-secondary);">Cliente</th>
+                                    <th style="padding: 1rem; color: var(--text-secondary);">Problema Relatado</th>
+                                    <th style="padding: 1rem; color: var(--text-secondary);">Status</th>
+                                    <th style="padding: 1rem; color: var(--text-secondary);">Despachar P/</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr style="border-bottom: 1px solid var(--border-glass);">
+                                    <td style="padding: 1rem;"><strong>#1042</strong></td>
+                                    <td style="padding: 1rem;">Empresa Cliente S/A</td>
+                                    <td style="padding: 1rem;">Split Carrier não gela</td>
+                                    <td style="padding: 1rem;"><span class="badge badge-warning">Aguardando
+                                            Técnico</span></td>
+                                    <td style="padding: 1rem;">
+                                        <select
+                                            style="background: var(--input-bg); border: 1px solid var(--input-border); color: var(--text-primary); padding: 0.5rem; border-radius: 6px;">
+                                            <option>Atribuir Técnico...</option>
+                                            <option>João Roberto</option>
+                                            <option>Carlos Magno</option>
+                                        </select>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="padding: 1rem;"><strong>#1038</strong></td>
+                                    <td style="padding: 1rem;">Restaurante Sabor</td>
+                                    <td style="padding: 1rem;">Instalação de Cortina Ar</td>
+                                    <td style="padding: 1rem;"><span class="badge badge-primary">Na Rota do
+                                            Técnico</span></td>
+                                    <td style="padding: 1rem;">Designado a: João R.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Conteúdo: Clientes Ativos -->
+                <div id="tab-clientes" class="tab-content">
+                    <div class="grid-cards">
+                        <div class="card">
+                            <div class="card-title">Empresa Cliente S/A</div>
+                            <div style="font-size: 0.9rem; margin-bottom: 0.5rem; color: var(--text-secondary);"><i
+                                    class="ph ph-phone"></i> (11) 99999-0000</div>
+                            <div style="font-size: 0.9rem; margin-bottom: 1rem; color: var(--text-secondary);"><i
+                                    class="ph ph-envelope"></i> contato@empresa.com.br</div>
+                            <div style="display: flex; gap: 0.5rem;">
+                                <span class="badge badge-success">PMOC Ativo</span>
+                                <span class="badge" style="background: var(--input-bg);">12 Equipamentos</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Conteúdo: Agendamentos da Semana -->
+                <div id="tab-agenda" class="tab-content">
+                    <div class="card">
+                        <h3 style="margin-bottom: 1.5rem;">Próximas Manutenções Preventivas</h3>
+                        <div
+                            style="display: flex; gap: 1rem; align-items: center; padding: 1rem; border-left: 3px solid var(--role-atendimento); background: var(--input-bg); border-radius: 8px;">
+                            <div
+                                style="text-align: center; border-right: 1px solid var(--border-glass); padding-right: 1rem;">
+                                <div style="font-size: 1.5rem; font-weight: bold; color: var(--role-atendimento);">10
+                                </div>
+                                <div style="font-size: 0.8rem; text-transform: uppercase;">OUT</div>
+                            </div>
+                            <div>
+                                <h4>PMOC Mensal - Empresa Cliente S/A</h4>
+                                <div style="font-size: 0.85rem; color: var(--text-secondary);">Agendado para 09:00 -
+                                    João Roberto</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </main>
+    </div>
+
+    <script src="../assets/js/menu.js"></script>
+</body>
+
+</html>

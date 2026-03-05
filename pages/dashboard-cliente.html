@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ClimaPro - Portal do Cliente</title>
+    <script>
+        const theme = localStorage.getItem('theme') || 'dark';
+        document.documentElement.setAttribute('data-theme', theme);
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <link rel="stylesheet" href="../assets/css/style.css">
+</head>
+
+<body>
+    <div class="app-container">
+
+        <!-- Mobile Header -->
+        <header class="mobile-header">
+            <div class="mobile-brand">
+                <i class="ph ph-snowflake"></i>
+                <span>Clima<span style="color: var(--accent-blue-ice);">Pro</span></span>
+            </div>
+            <button class="menu-toggle" id="menuToggle" aria-label="Abrir Menu">
+                <i class="ph ph-list"></i>
+            </button>
+        </header>
+
+        <!-- Sidebar Overlay & Sidebar -->
+        <div class="sidebar-overlay" id="sidebarOverlay"></div>
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <div class="sidebar-brand">
+                    <i class="ph ph-snowflake"></i>
+                    <span>Portal Cliente</span>
+                </div>
+                <!-- Botão de fechar (mobile) -->
+                <button class="close-sidebar" id="closeSidebar" aria-label="Fechar Menu">
+                    <i class="ph ph-x"></i>
+                </button>
+            </div>
+
+            <div class="sidebar-user">
+                <div class="user-avatar" style="color: var(--role-cliente);">
+                    <i class="ph ph-user"></i>
+                </div>
+                <div class="user-info">
+                    <h4>Empresa Cliente S/A</h4>
+                    <span class="user-role"
+                        style="background: rgba(56, 189, 248, 0.1); color: var(--role-cliente);">Cliente VIP</span>
+                </div>
+            </div>
+
+            <nav class="sidebar-menu">
+                <div class="menu-label">Principal</div>
+                <a href="#" class="menu-item active" data-tab="tab-chamados">
+                    <i class="ph ph-squares-four"></i> Visão Geral
+                </a>
+                <a href="#" class="menu-item" data-tab="tab-equipamentos">
+                    <i class="ph ph-thermometer"></i> Meus Equipamentos
+                </a>
+                <a href="#" class="menu-item" data-tab="tab-novo-chamado">
+                    <i class="ph ph-clipboard-text"></i> Novo Chamado
+                </a>
+
+                <div class="menu-label">Financeiro</div>
+                <a href="#" class="menu-item" data-tab="tab-faturas">
+                    <i class="ph ph-receipt"></i> Faturas
+                </a>
+
+                <div class="sidebar-footer">
+                    <a href="../index.html" class="menu-item logout-btn">
+                        <i class="ph ph-sign-out"></i> Sair do Sistema
+                    </a>
+                </div>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="app-main">
+            <div class="top-bar">
+                <button id="themeToggle" class="theme-btn" aria-label="Alternar Tema">
+                    <i class="ph ph-moon dark-icon"></i>
+                    <i class="ph ph-sun light-icon"></i>
+                </button>
+            </div>
+
+            <div class="page-content">
+                <div class="dash-header">
+                    <h2>Área do Cliente</h2>
+                    <p class="text-secondary">Gerencie suas solicitações de manutenção e máquinas cadastradas.</p>
+                </div>
+
+                <!-- Abas -->
+                <nav class="tabs-nav">
+                    <button class="tab-btn active" data-tab="tab-chamados"><i class="ph ph-wrench"></i> Meus
+                        Chamados</button>
+                    <button class="tab-btn" data-tab="tab-novo-chamado"><i class="ph ph-plus-circle"></i> Novo
+                        Chamado</button>
+                    <button class="tab-btn" data-tab="tab-equipamentos"><i class="ph ph-wind"></i> Meus
+                        Equipamentos</button>
+                    <button class="tab-btn" data-tab="tab-faturas"><i class="ph ph-receipt"></i> Faturas</button>
+                </nav>
+
+                <!-- Conteúdo: Meus Chamados -->
+                <div id="tab-chamados" class="tab-content active">
+                    <div class="grid-cards">
+                        <div class="card">
+                            <div class="card-title">
+                                <span>OS #1042 - Ar não gela</span>
+                                <span class="badge badge-warning">Em Análise</span>
+                            </div>
+                            <p class="text-secondary" style="margin-bottom: 1rem;"><i class="ph ph-map-pin"></i> Loja
+                                Matriz - Setor de Vendas</p>
+                            <div style="font-size: 0.9rem; margin-bottom: 0.5rem;"><strong>Equipamento:</strong> Split
+                                Carrier 18.000 BTUs</div>
+                            <div style="font-size: 0.9rem;"><strong>Criado em:</strong> Hoje, 09:30</div>
+                        </div>
+
+                        <div class="card">
+                            <div class="card-title">
+                                <span>OS #1038 - Gotejamento excessivo</span>
+                                <span class="badge badge-primary">A Caminho</span>
+                            </div>
+                            <p class="text-secondary" style="margin-bottom: 1rem;"><i class="ph ph-map-pin"></i> Filial
+                                Centro - CPD</p>
+                            <div style="font-size: 0.9rem; margin-bottom: 0.5rem;"><strong>Técnico:</strong> João
+                                Roberto</div>
+                            <div style="font-size: 0.9rem;"><strong>Previsão de Chegada:</strong> 14:00</div>
+                        </div>
+
+                        <div class="card" style="opacity: 0.7;">
+                            <div class="card-title">
+                                <span>OS #0984 - PMOC Mensal</span>
+                                <span class="badge badge-success">Concluído</span>
+                            </div>
+                            <p class="text-secondary" style="margin-bottom: 1rem;"><i class="ph ph-map-pin"></i> Loja
+                                Matriz - Todos os Setores</p>
+                            <div style="font-size: 0.9rem; margin-bottom: 0.5rem;"><strong>Serviço:</strong> Limpeza de
+                                Filtros e Verificação de Gás</div>
+                            <div style="font-size: 0.9rem;"><strong>Data:</strong> 01/10/2026</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Conteúdo: Novo Chamado -->
+                <div id="tab-novo-chamado" class="tab-content">
+                    <div class="card glass-panel" style="max-width: 600px;">
+                        <h3 style="margin-bottom: 1.5rem;">Abrir Solicitação de Serviço</h3>
+                        <form onsubmit="event.preventDefault(); alert('Chamado aberto com sucesso!');">
+                            <div class="input-group">
+                                <label
+                                    style="display:block; margin-bottom: 0.5rem; color: var(--text-secondary);">Equipamento/Local:</label>
+                                <select class="input-wrapper input"
+                                    style="width: 100%; background: var(--input-bg); border: 1px solid var(--input-border); padding: 1rem; border-radius: 12px; color: var(--text-primary);">
+                                    <option value="1">Split Carrier 18.000 BTUs (Vendas Matriz)</option>
+                                    <option value="2">Cassete LG 36.000 BTUs (Reunião 1)</option>
+                                    <option value="3">Geral / Não sei especificar</option>
+                                </select>
+                            </div>
+
+                            <div class="input-group">
+                                <label
+                                    style="display:block; margin-bottom: 0.5rem; color: var(--text-secondary);">Descreva
+                                    o Problema (ex: lentidão, mau cheiro, gotejamento, erro no painel):</label>
+                                <textarea rows="4"
+                                    style="width: 100%; background: var(--input-bg); border: 1px solid var(--input-border); padding: 1rem; border-radius: 12px; color: var(--text-primary); resize: vertical; font-family: var(--font-main);"
+                                    required></textarea>
+                            </div>
+
+                            <button type="submit" class="btn-primary" style="width: 100%;">Enviar Chamado <i
+                                    class="ph ph-paper-plane-right"></i></button>
+                        </form>
+                    </div>
+                </div>
+
+                <!-- Conteúdo: Meus Equipamentos -->
+                <div id="tab-equipamentos" class="tab-content">
+                    <div class="grid-cards">
+                        <div class="card" style="display: flex; gap: 1rem; align-items: center;">
+                            <div style="font-size: 3rem; color: var(--accent-blue-ice);"><i class="ph ph-wind"></i>
+                            </div>
+                            <div>
+                                <h4 style="margin-bottom: 0.25rem;">Split High Wall Carrier</h4>
+                                <div style="font-size: 0.85rem; color: var(--text-secondary);">18.000 BTUs • Inverter
+                                </div>
+                                <div style="font-size: 0.85rem; color: var(--text-secondary);">Local: Matriz / Vendas
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card" style="display: flex; gap: 1rem; align-items: center;">
+                            <div style="font-size: 3rem; color: var(--accent-blue-ice);"><i
+                                    class="ph ph-arrows-out-line-vertical"></i></div>
+                            <div>
+                                <h4 style="margin-bottom: 0.25rem;">Cassete 4 Vias LG</h4>
+                                <div style="font-size: 0.85rem; color: var(--text-secondary);">36.000 BTUs • Teto</div>
+                                <div style="font-size: 0.85rem; color: var(--text-secondary);">Local: Matriz / Sala
+                                    Reunião</div>
+                            </div>
+                        </div>
+                        <div class="card"
+                            style="display: flex; gap: 1rem; align-items: center; justify-content: center; border: 2px dashed var(--input-border); cursor: pointer;">
+                            <div style="text-align: center; color: var(--text-secondary);">
+                                <i class="ph ph-plus" style="font-size: 2rem;"></i>
+                                <p>Solicitar Cadastro de Máquina</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Conteúdo: Faturas -->
+                <div id="tab-faturas" class="tab-content">
+                    <div class="card">
+                        <table style="width: 100%; text-align: left; border-collapse: collapse;">
+                            <thead style="border-bottom: 1px solid var(--border-glass);">
+                                <tr>
+                                    <th style="padding: 1rem; color: var(--text-secondary);">Referência</th>
+                                    <th style="padding: 1rem; color: var(--text-secondary);">Vencimento</th>
+                                    <th style="padding: 1rem; color: var(--text-secondary);">Valor</th>
+                                    <th style="padding: 1rem; color: var(--text-secondary);">Status</th>
+                                    <th style="padding: 1rem; color: var(--text-secondary);">Ação</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr style="border-bottom: 1px solid var(--border-glass);">
+                                    <td style="padding: 1rem;">Contrato PMOC - Out/26</td>
+                                    <td style="padding: 1rem;">10/10/2026</td>
+                                    <td style="padding: 1rem;">R$ 1.250,00</td>
+                                    <td style="padding: 1rem;"><span class="badge badge-warning">Pendente</span></td>
+                                    <td style="padding: 1rem;"><button
+                                            style="background: transparent; border: 1px solid var(--border-glass); color: var(--text-primary); padding: 0.5rem 1rem; border-radius: 8px; cursor: pointer;"><i
+                                                class="ph ph-barcode"></i> Pagar</button></td>
+                                </tr>
+                                <tr>
+                                    <td style="padding: 1rem;">Instalação Adicional Setembro</td>
+                                    <td style="padding: 1rem;">15/09/2026</td>
+                                    <td style="padding: 1rem;">R$ 800,00</td>
+                                    <td style="padding: 1rem;"><span class="badge badge-success">Pago</span></td>
+                                    <td style="padding: 1rem;"><button
+                                            style="background: transparent; border: 1px solid var(--border-glass); color: var(--text-primary); padding: 0.5rem 1rem; border-radius: 8px; cursor: pointer;"><i
+                                                class="ph ph-download-simple"></i> Recibo</button></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+            </div>
+        </main>
+    </div>
+
+    <!-- Script that initializes menu and tabs logic -->
+    <!-- Define form reset function here as well since we don't have modules -->
+    <script src="../assets/js/menu.js"></script>
+</body>
+
+</html>

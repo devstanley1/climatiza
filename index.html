@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ClimaPro - Acesso ao Sistema</title>
+    <!-- FOUC Prevention -->
+    <script>
+        const theme = localStorage.getItem('theme') || 'dark';
+        document.documentElement.setAttribute('data-theme', theme);
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+
+<body class="login-body">
+    <div class="login-container glass-panel">
+        <div class="login-banner">
+            <div class="glass-overlay"></div>
+            <div class="banner-content">
+                <div class="brand">
+                    <i class="ph ph-snowflake brand-icon"></i>
+                    <h1>Clima<span style="color: var(--accent-blue-ice);">Pro</span></h1>
+                </div>
+                <p class="slogan">Excelência e Inovação em Climatização e Refrigeração Comercial/Residencial.</p>
+                <div class="services-list">
+                    <div class="service-item">
+                        <i class="ph ph-wind"></i><span>Instalação de Split</span>
+                    </div>
+                    <div class="service-item">
+                        <i class="ph ph-drop"></i><span>Limpeza e Higienização</span>
+                    </div>
+                    <div class="service-item">
+                        <i class="ph ph-wrench"></i><span>Manutenção Preventiva</span>
+                    </div>
+                    <div class="service-item">
+                        <i class="ph ph-buildings"></i><span>Projetos VRF</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="login-form-wrapper">
+            <div class="theme-toggle-wrapper">
+                <button id="themeToggle" class="theme-btn" aria-label="Alternar Tema">
+                    <i class="ph ph-moon dark-icon"></i>
+                    <i class="ph ph-sun light-icon"></i>
+                </button>
+            </div>
+            <form class="login-form" id="loginForm">
+                <h2>Acesso ao Sistema</h2>
+                <p class="subtitle">Selecione o seu perfil e insira suas credenciais</p>
+                <div class="profile-selector">
+                    <label class="profile-option">
+                        <input type="radio" name="profile" value="cliente" checked>
+                        <div class="profile-card cliente-card"><i class="ph ph-user"></i><span>Cliente</span></div>
+                    </label>
+                    <label class="profile-option">
+                        <input type="radio" name="profile" value="tecnico">
+                        <div class="profile-card tecnico-card"><i class="ph ph-wrench"></i><span>Técnico</span></div>
+                    </label>
+                    <label class="profile-option">
+                        <input type="radio" name="profile" value="atendimento">
+                        <div class="profile-card atendimento-card"><i class="ph ph-headset"></i><span>Atendimento</span>
+                        </div>
+                    </label>
+                    <label class="profile-option">
+                        <input type="radio" name="profile" value="admin">
+                        <div class="profile-card admin-card"><i class="ph ph-shield-check"></i><span>Admin</span></div>
+                    </label>
+                </div>
+                <div class="input-group">
+                    <label for="email" class="visually-hidden">E-mail</label>
+                    <div class="input-wrapper">
+                        <i class="ph ph-envelope"></i>
+                        <input type="email" id="email" placeholder="E-mail" aria-label="E-mail de acesso">
+                    </div>
+                </div>
+                <div class="input-group">
+                    <label for="password" class="visually-hidden">Senha</label>
+                    <div class="input-wrapper">
+                        <i class="ph ph-lock-key"></i>
+                        <input type="password" id="password" placeholder="Senha" aria-label="Senha">
+                    </div>
+                </div>
+                <div class="form-actions">
+                    <label class="remember-me"><input type="checkbox"><span>Lembrar minhas credenciais</span></label>
+                    <a href="#" class="forgot-password">Esqueci a senha</a>
+                </div>
+                <button type="submit" class="btn-primary">Acessar Painel <i class="ph ph-sign-in"></i></button>
+            </form>
+        </div>
+    </div>
+    <script src="assets/js/menu.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ClimaPro - Administração Mestre</title>
+    <script>
+        const theme = localStorage.getItem('theme') || 'dark';
+        document.documentElement.setAttribute('data-theme', theme);
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <link rel="stylesheet" href="../assets/css/style.css">
+
+    <!-- Chart.js para gráficos admin (CDN) -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body>
+    <div class="app-container">
+
+        <header class="mobile-header">
+            <div class="mobile-brand">
+                <i class="ph ph-snowflake" style="color: var(--role-admin);"></i>
+                <span>Clima<span style="color: var(--accent-blue-ice);">Pro</span> - Admin</span>
+            </div>
+            <button class="menu-toggle" id="menuToggle" aria-label="Abrir Menu">
+                <i class="ph ph-list"></i>
+            </button>
+        </header>
+
+        <div class="sidebar-overlay" id="sidebarOverlay"></div>
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <div class="sidebar-brand">
+                    <i class="ph ph-shield-check" style="color: var(--role-admin);"></i>
+                    <span>Diretoria</span>
+                </div>
+                <button class="close-sidebar" id="closeSidebar" aria-label="Fechar Menu">
+                    <i class="ph ph-x"></i>
+                </button>
+            </div>
+
+            <div class="sidebar-user">
+                <div class="user-avatar" style="color: var(--role-admin);">
+                    <i class="ph ph-crown"></i>
+                </div>
+                <div class="user-info">
+                    <h4>Gestor Master</h4>
+                    <span class="user-role"
+                        style="background: rgba(59, 130, 246, 0.1); color: var(--role-admin);">Administrador</span>
+                </div>
+            </div>
+
+            <nav class="sidebar-menu">
+                <div class="menu-label">Métricas</div>
+                <a href="#" class="menu-item active" data-tab="tab-visao">
+                    <i class="ph ph-chart-line-up"></i> Dashboard Global
+                </a>
+                <a href="#" class="menu-item" data-tab="tab-graficos">
+                    <i class="ph ph-users-three"></i> Monitoramento Técnicos
+                </a>
+                <a href="#" class="menu-item" data-tab="tab-config">
+                    <i class="ph ph-gear"></i> Configurações SLA
+                </a>
+
+                <div class="sidebar-footer">
+                    <a href="../index.html" class="menu-item logout-btn">
+                        <i class="ph ph-sign-out"></i> Sair do Sistema
+                    </a>
+                </div>
+            </nav>
+        </aside>
+
+        <main class="app-main">
+            <div class="top-bar">
+                <button id="themeToggle" class="theme-btn" aria-label="Alternar Tema">
+                    <i class="ph ph-moon dark-icon"></i>
+                    <i class="ph ph-sun light-icon"></i>
+                </button>
+            </div>
+
+            <div class="page-content">
+                <div class="dash-header">
+                    <h2>Visão Estratégica</h2>
+                    <p class="text-secondary">Indicadores MRR (Monthly Recurring Revenue), equipes de campo e controle
+                        de acordos de nível de serviço (SLA).</p>
+                </div>
+
+                <nav class="tabs-nav">
+                    <button class="tab-btn active" data-tab="tab-visao"><i class="ph ph-faders"></i> Visão
+                        Global</button>
+                    <button class="tab-btn" data-tab="tab-graficos"><i class="ph ph-chart-bar"></i> Financeiro &
+                        PMOC</button>
+                    <button class="tab-btn" data-tab="tab-config"><i class="ph ph-gear"></i>
+                        Configurações</button>
+                </nav>
+
+                <!-- Conteúdo: Visão Global (KPIs Clássicos) -->
+                <div id="tab-visao" class="tab-content active">
+                    <div class="grid-cards" style="margin-bottom: 2rem;">
+                        <div class="card">
+                            <div class="card-title"> MRR Contratos Ativos <i class="ph ph-currency-dollar"
+                                    style="color: #34d399;"></i></div>
+                            <div class="card-value text-primary">R$ 54.200</div>
+                            <div style="font-size: 0.85rem; color: #34d399; margin-top: 0.5rem;"><i
+                                    class="ph ph-trend-up"></i> +8.5% este mês</div>
+                        </div>
+
+                        <div class="card">
+                            <div class="card-title"> Técnicos em Campo <i class="ph ph-users"
+                                    style="color: var(--role-tecnico);"></i></div>
+                            <div class="card-value text-primary">12 / 15</div>
+                            <div style="font-size: 0.85rem; color: var(--text-secondary); margin-top: 0.5rem;">3 em
+                                descanso/folga</div>
+                        </div>
+
+                        <div class="card">
+                            <div class="card-title"> Tempo Médio de Resposta <i class="ph ph-clock"
+                                    style="color: #fbbf24;"></i></div>
+                            <div class="card-value text-primary">4h 15m</div>
+                            <div style="font-size: 0.85rem; color: #fbbf24; margin-top: 0.5rem;"><i
+                                    class="ph ph-warning-circle"></i> Meta SLA: 4h</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Conteúdo: Gráficos -->
+                <div id="tab-graficos" class="tab-content">
+                    <div class="grid-cards">
+                        <!-- Chart de MRR -->
+                        <div class="card col-span-2" style="min-height: 400px; padding: 1.5rem;">
+                            <h3 style="margin-bottom: 1rem;">Evolução de MRR (Contratos de Manutenção PMOC)</h3>
+                            <canvas id="mrrChart" style="width: 100%; max-height: 350px;"></canvas>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Conteúdo: Configurações -->
+                <div id="tab-config" class="tab-content">
+                    <div class="grid-cards">
+                        <!-- Lista de SLA ou Config -->
+                        <div class="card col-span-2" style="padding: 1.5rem;">
+                            <h3 style="margin-bottom: 1.5rem; display: flex; align-items: center; gap: 0.5rem;"><i
+                                    class="ph ph-sliders"></i> Ajustes do Sistema</h3>
+
+                            <form class="config-form"
+                                style="display: grid; gap: 1.5rem; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));">
+                                <!-- Coluna 1: Configurações Gerais -->
+                                <div class="config-section"
+                                    style="background: var(--input-bg); padding: 1.5rem; border-radius: 12px; border: 1px solid var(--border-glass);">
+                                    <h4 style="margin-bottom: 1rem; color: var(--accent-blue-ice);">Configurações Gerais
+                                    </h4>
+
+                                    <div class="input-group">
+                                        <label for="sysName"
+                                            style="display: block; margin-bottom: 0.5rem; color: var(--text-secondary); font-size: 0.9rem;">Nome
+                                            do Sistema</label>
+                                        <div class="input-wrapper">
+                                            <i class="ph ph-text-aa"></i>
+                                            <input type="text" id="sysName" value="ClimaPro"
+                                                placeholder="Nome do Sistema" aria-label="Nome do Sistema">
+                                        </div>
+                                    </div>
+
+                                    <div class="input-group">
+                                        <label for="contactEmail"
+                                            style="display: block; margin-bottom: 0.5rem; color: var(--text-secondary); font-size: 0.9rem;">E-mail
+                                            de Contato Matriz</label>
+                                        <div class="input-wrapper">
+                                            <i class="ph ph-envelope"></i>
+                                            <input type="email" id="contactEmail" value="contato@climapro.com.br"
+                                                placeholder="E-mail" aria-label="E-mail de Contato">
+                                        </div>
+                                    </div>
+
+                                    <div class="form-actions" style="margin-top: 1rem; margin-bottom: 0;">
+                                        <label class="remember-me">
+                                            <input type="checkbox" checked>
+                                            <span>Notificar técnicos via WhatsApp</span>
+                                        </label>
+                                    </div>
+                                </div>
+
+                                <!-- Coluna 2: Configurações de SLA -->
+                                <div class="config-section"
+                                    style="background: var(--input-bg); padding: 1.5rem; border-radius: 12px; border: 1px solid var(--border-glass);">
+                                    <h4 style="margin-bottom: 1rem; color: var(--accent-cyan-neon);">Tempos de SLA
+                                        (Horas)</h4>
+
+                                    <div class="input-group">
+                                        <label for="slaCritico"
+                                            style="display: flex; justify-content: space-between; margin-bottom: 0.5rem; color: var(--text-secondary); font-size: 0.9rem;">
+                                            <span>Atendimento Crítico (Vazamento)</span>
+                                            <strong style="color: #ef4444;">2h</strong>
+                                        </label>
+                                        <input type="range" id="slaCritico" min="1" max="24" value="2"
+                                            style="width: 100%; accent-color: #ef4444;"
+                                            aria-label="Ajuste do SLA Crítico">
+                                    </div>
+
+                                    <div class="input-group" style="margin-top: 1.5rem;">
+                                        <label for="slaPadrao"
+                                            style="display: flex; justify-content: space-between; margin-bottom: 0.5rem; color: var(--text-secondary); font-size: 0.9rem;">
+                                            <span>Limpeza/Manutenção Preventiva</span>
+                                            <strong style="color: var(--accent-cyan-neon);">48h</strong>
+                                        </label>
+                                        <input type="range" id="slaPadrao" min="24" max="120" value="48" step="12"
+                                            style="width: 100%; accent-color: var(--accent-cyan-neon);"
+                                            aria-label="Ajuste do SLA Padrão">
+                                    </div>
+                                </div>
+
+                                <!-- Botão de Salvar -->
+                                <div
+                                    style="grid-column: 1 / -1; display: flex; justify-content: flex-end; margin-top: 1rem;">
+                                    <button type="button" class="btn-primary"
+                                        style="max-width: 250px; border-radius: 8px;">
+                                        <i class="ph ph-save"></i> Salvar Configurações
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+
+                </div>
+        </main>
+    </div>
+
+    <script src="../assets/js/menu.js"></script>
+    <script>
+        // Init ChartJS apenas na página admin 
+        document.addEventListener('DOMContentLoaded', () => {
+            const ctx = document.getElementById('mrrChart');
+            if (ctx) {
+                // Hardcoded chart for MVP
+                const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+                const gridColor = isDark ? 'rgba(255, 255, 255, 0.1)' : 'rgba(0, 0, 0, 0.1)';
+                const textColor = isDark ? '#94a3b8' : '#64748b';
+
+                new Chart(ctx, {
+                    type: 'line',
+                    data: {
+                        labels: ['Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out'],
+                        datasets: [{
+                            label: 'MRR (R$ / Mil)',
+                            data: [35, 38, 42, 45, 48, 50, 52, 54.2],
+                            borderColor: '#3b82f6',
+                            backgroundColor: 'rgba(59, 130, 246, 0.2)',
+                            tension: 0.4,
+                            fill: true,
+                            borderWidth: 3
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            legend: { labels: { color: textColor } }
+                        },
+                        scales: {
+                            x: { grid: { color: gridColor }, ticks: { color: textColor } },
+                            y: { grid: { color: gridColor }, ticks: { color: textColor } }
+                        }
+                    }
+                });
+            }
+        });
+    </script>
+</body>
+
+</html>
