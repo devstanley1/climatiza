@@ -20,13 +20,13 @@
     <div class="app-container">
 
         <header class="mobile-header">
+            <button class="menu-toggle" id="menuToggle" aria-label="Abrir Menu">
+                <i class="ph ph-list"></i>
+            </button>
             <div class="mobile-brand">
                 <i class="ph ph-snowflake" style="color: var(--role-tecnico);"></i>
                 <span>Clima<span style="color: var(--accent-blue-ice);">Pro</span> - Técnico</span>
             </div>
-            <button class="menu-toggle" id="menuToggle" aria-label="Abrir Menu">
-                <i class="ph ph-list"></i>
-            </button>
         </header>
 
         <div class="sidebar-overlay" id="sidebarOverlay"></div>
@@ -172,7 +172,8 @@
                 <!-- Conteúdo: Peças em Rota -->
                 <div id="tab-pecas" class="tab-content">
                     <div class="card">
-                        <table style="width: 100%; text-align: left; border-collapse: collapse;">
+                        <table class="responsive-table"
+                            style="width: 100%; text-align: left; border-collapse: collapse;">
                             <thead style="border-bottom: 1px solid var(--border-glass);">
                                 <tr>
                                     <th style="padding: 1rem; color: var(--text-secondary);">Código</th>
@@ -183,16 +184,16 @@
                             </thead>
                             <tbody>
                                 <tr style="border-bottom: 1px solid var(--border-glass);">
-                                    <td style="padding: 1rem;">SKU-COMP-01</td>
-                                    <td style="padding: 1rem;">Capacitor Duplo 35+5uF</td>
-                                    <td style="padding: 1rem;">2x</td>
-                                    <td style="padding: 1rem;">#1038</td>
+                                    <td style="padding: 1rem;" data-label="Código">SKU-COMP-01</td>
+                                    <td style="padding: 1rem;" data-label="Item">Capacitor Duplo 35+5uF</td>
+                                    <td style="padding: 1rem;" data-label="Qtd">2x</td>
+                                    <td style="padding: 1rem;" data-label="Destino (OS)">#1038</td>
                                 </tr>
                                 <tr>
-                                    <td style="padding: 1rem;">SKU-TBO-14</td>
-                                    <td style="padding: 1rem;">Tubo de Cobre 1/4"</td>
-                                    <td style="padding: 1rem;">10m</td>
-                                    <td style="padding: 1rem;">Reserva de Carro</td>
+                                    <td style="padding: 1rem;" data-label="Código">SKU-TBO-14</td>
+                                    <td style="padding: 1rem;" data-label="Item">Tubo de Cobre 1/4"</td>
+                                    <td style="padding: 1rem;" data-label="Qtd">10m</td>
+                                    <td style="padding: 1rem;" data-label="Destino (OS)">Reserva de Carro</td>
                                 </tr>
                             </tbody>
                         </table>

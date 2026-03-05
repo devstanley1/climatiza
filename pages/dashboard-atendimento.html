@@ -20,13 +20,13 @@
     <div class="app-container">
 
         <header class="mobile-header">
+            <button class="menu-toggle" id="menuToggle" aria-label="Abrir Menu">
+                <i class="ph ph-list"></i>
+            </button>
             <div class="mobile-brand">
                 <i class="ph ph-snowflake" style="color: var(--role-atendimento);"></i>
                 <span>Clima<span style="color: var(--accent-blue-ice);">Pro</span> - SAC</span>
             </div>
-            <button class="menu-toggle" id="menuToggle" aria-label="Abrir Menu">
-                <i class="ph ph-list"></i>
-            </button>
         </header>
 
         <div class="sidebar-overlay" id="sidebarOverlay"></div>
@@ -105,8 +105,9 @@
                                 class="ph ph-plus"></i> Nova OS</button>
                     </div>
 
-                    <div class="card" style="padding: 0; overflow-x: auto;">
-                        <table style="width: 100%; text-align: left; border-collapse: collapse; min-width: 800px;">
+                    <div class="card" style="padding: 0;">
+                        <table class="responsive-table"
+                            style="width: 100%; text-align: left; border-collapse: collapse;">
                             <thead style="border-bottom: 1px solid var(--border-glass); background: rgba(0,0,0,0.2);">
                                 <tr>
                                     <th style="padding: 1rem; color: var(--text-secondary);">OS</th>
@@ -118,12 +119,13 @@
                             </thead>
                             <tbody>
                                 <tr style="border-bottom: 1px solid var(--border-glass);">
-                                    <td style="padding: 1rem;"><strong>#1042</strong></td>
-                                    <td style="padding: 1rem;">Empresa Cliente S/A</td>
-                                    <td style="padding: 1rem;">Split Carrier não gela</td>
-                                    <td style="padding: 1rem;"><span class="badge badge-warning">Aguardando
-                                            Técnico</span></td>
-                                    <td style="padding: 1rem;">
+                                    <td style="padding: 1rem;" data-label="OS"><strong>#1042</strong></td>
+                                    <td style="padding: 1rem;" data-label="Cliente">Empresa Cliente S/A</td>
+                                    <td style="padding: 1rem;" data-label="Problema Relatado">Split Carrier não gela
+                                    </td>
+                                    <td style="padding: 1rem;" data-label="Status"><span
+                                            class="badge badge-warning">Aguardando Técnico</span></td>
+                                    <td style="padding: 1rem;" data-label="Despachar P/">
                                         <select
                                             style="background: var(--input-bg); border: 1px solid var(--input-border); color: var(--text-primary); padding: 0.5rem; border-radius: 6px;">
                                             <option>Atribuir Técnico...</option>
@@ -133,12 +135,13 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td style="padding: 1rem;"><strong>#1038</strong></td>
-                                    <td style="padding: 1rem;">Restaurante Sabor</td>
-                                    <td style="padding: 1rem;">Instalação de Cortina Ar</td>
-                                    <td style="padding: 1rem;"><span class="badge badge-primary">Na Rota do
-                                            Técnico</span></td>
-                                    <td style="padding: 1rem;">Designado a: João R.</td>
+                                    <td style="padding: 1rem;" data-label="OS"><strong>#1038</strong></td>
+                                    <td style="padding: 1rem;" data-label="Cliente">Restaurante Sabor</td>
+                                    <td style="padding: 1rem;" data-label="Problema Relatado">Instalação de Cortina Ar
+                                    </td>
+                                    <td style="padding: 1rem;" data-label="Status"><span class="badge badge-primary">Na
+                                            Rota do Técnico</span></td>
+                                    <td style="padding: 1rem;" data-label="Despachar P/">Designado a: João R.</td>
                                 </tr>
                             </tbody>
                         </table>

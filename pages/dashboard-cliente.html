@@ -21,13 +21,13 @@
 
         <!-- Mobile Header -->
         <header class="mobile-header">
+            <button class="menu-toggle" id="menuToggle" aria-label="Abrir Menu">
+                <i class="ph ph-list"></i>
+            </button>
             <div class="mobile-brand">
                 <i class="ph ph-snowflake"></i>
                 <span>Clima<span style="color: var(--accent-blue-ice);">Pro</span></span>
             </div>
-            <button class="menu-toggle" id="menuToggle" aria-label="Abrir Menu">
-                <i class="ph ph-list"></i>
-            </button>
         </header>
 
         <!-- Sidebar Overlay & Sidebar -->
@@ -215,7 +215,8 @@
                 <!-- Conteúdo: Faturas -->
                 <div id="tab-faturas" class="tab-content">
                     <div class="card">
-                        <table style="width: 100%; text-align: left; border-collapse: collapse;">
+                        <table class="responsive-table"
+                            style="width: 100%; text-align: left; border-collapse: collapse;">
                             <thead style="border-bottom: 1px solid var(--border-glass);">
                                 <tr>
                                     <th style="padding: 1rem; color: var(--text-secondary);">Referência</th>
@@ -227,20 +228,23 @@
                             </thead>
                             <tbody>
                                 <tr style="border-bottom: 1px solid var(--border-glass);">
-                                    <td style="padding: 1rem;">Contrato PMOC - Out/26</td>
-                                    <td style="padding: 1rem;">10/10/2026</td>
-                                    <td style="padding: 1rem;">R$ 1.250,00</td>
-                                    <td style="padding: 1rem;"><span class="badge badge-warning">Pendente</span></td>
-                                    <td style="padding: 1rem;"><button
+                                    <td style="padding: 1rem;" data-label="Referência">Contrato PMOC - Out/26</td>
+                                    <td style="padding: 1rem;" data-label="Vencimento">10/10/2026</td>
+                                    <td style="padding: 1rem;" data-label="Valor">R$ 1.250,00</td>
+                                    <td style="padding: 1rem;" data-label="Status"><span
+                                            class="badge badge-warning">Pendente</span></td>
+                                    <td style="padding: 1rem;" data-label="Ação"><button
                                             style="background: transparent; border: 1px solid var(--border-glass); color: var(--text-primary); padding: 0.5rem 1rem; border-radius: 8px; cursor: pointer;"><i
                                                 class="ph ph-barcode"></i> Pagar</button></td>
                                 </tr>
                                 <tr>
-                                    <td style="padding: 1rem;">Instalação Adicional Setembro</td>
-                                    <td style="padding: 1rem;">15/09/2026</td>
-                                    <td style="padding: 1rem;">R$ 800,00</td>
-                                    <td style="padding: 1rem;"><span class="badge badge-success">Pago</span></td>
-                                    <td style="padding: 1rem;"><button
+                                    <td style="padding: 1rem;" data-label="Referência">Instalação Adicional Setembro
+                                    </td>
+                                    <td style="padding: 1rem;" data-label="Vencimento">15/09/2026</td>
+                                    <td style="padding: 1rem;" data-label="Valor">R$ 800,00</td>
+                                    <td style="padding: 1rem;" data-label="Status"><span
+                                            class="badge badge-success">Pago</span></td>
+                                    <td style="padding: 1rem;" data-label="Ação"><button
                                             style="background: transparent; border: 1px solid var(--border-glass); color: var(--text-primary); padding: 0.5rem 1rem; border-radius: 8px; cursor: pointer;"><i
                                                 class="ph ph-download-simple"></i> Recibo</button></td>
                                 </tr>
