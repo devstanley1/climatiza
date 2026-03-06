@@ -32,12 +32,45 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Login Form logic
     const loginForm = document.getElementById('loginForm');
+    const recoveryForm = document.getElementById('recoveryForm');
+    const btnForgot = document.querySelector('.forgot-password');
+    const btnBackToLogin = document.getElementById('backToLogin');
+
     if (loginForm) {
         loginForm.addEventListener('submit', (e) => {
             e.preventDefault();
             const profile = document.querySelector('input[name="profile"]:checked').value;
             // Redirect based on selected profile
             window.location.href = `pages/dashboard-${profile}.html`;
+        });
+    }
+
+    // Toggle Recovery vs Login
+    if (btnForgot && recoveryForm && loginForm) {
+        btnForgot.addEventListener('click', (e) => {
+            e.preventDefault();
+            loginForm.style.display = 'none';
+            recoveryForm.style.display = 'flex';
+            recoveryForm.style.flexDirection = 'column';
+            recoveryForm.style.animation = 'fadeIn 0.3s ease';
+        });
+    }
+
+    if (btnBackToLogin && recoveryForm && loginForm) {
+        btnBackToLogin.addEventListener('click', (e) => {
+            e.preventDefault();
+            recoveryForm.style.display = 'none';
+            loginForm.style.display = 'flex';
+            loginForm.style.flexDirection = 'column';
+            loginForm.style.animation = 'fadeIn 0.3s ease';
+        });
+    }
+
+    if (recoveryForm) {
+        recoveryForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            alert('Um e-mail de recuperação foi enviado se o endereço estiver cadastrado em nossa base.');
+            btnBackToLogin.click();
         });
     }
 

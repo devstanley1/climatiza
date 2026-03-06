@@ -99,31 +99,41 @@
                         Configurações</button>
                 </nav>
 
-                <!-- Conteúdo: Visão Global (KPIs Clássicos) -->
+                <!-- Conteúdo: Visão Global (Indicadores e Movimentação) -->
                 <div id="tab-visao" class="tab-content active">
+                    <h3 style="margin-bottom: 1rem; color: var(--text-primary);"><i class="ph ph-chart-pie-slice"
+                            style="color: var(--accent-cyan-neon);"></i> Movimentação de OS</h3>
                     <div class="grid-cards" style="margin-bottom: 2rem;">
-                        <div class="card">
-                            <div class="card-title"> MRR Contratos Ativos <i class="ph ph-currency-dollar"
+                        <div class="card" style="border-left: 4px solid #facc15;">
+                            <div class="card-title"> OS Pendentes <i class="ph ph-clock" style="color: #facc15;"></i>
+                            </div>
+                            <div class="card-value text-primary">24</div>
+                            <div style="font-size: 0.85rem; color: var(--text-secondary); margin-top: 0.5rem;">
+                                Aguardando técnico</div>
+                        </div>
+
+                        <div class="card" style="border-left: 4px solid var(--accent-blue-ice);">
+                            <div class="card-title"> Em Andamento <i class="ph ph-spinner-gap"
+                                    style="color: var(--accent-blue-ice);"></i></div>
+                            <div class="card-value text-primary">12</div>
+                            <div style="font-size: 0.85rem; color: var(--text-secondary); margin-top: 0.5rem;">Em
+                                execução nas rotas</div>
+                        </div>
+
+                        <div class="card" style="border-left: 4px solid #34d399;">
+                            <div class="card-title"> Concluídas (Mês) <i class="ph ph-check-circle"
                                     style="color: #34d399;"></i></div>
-                            <div class="card-value text-primary">R$ 54.200</div>
+                            <div class="card-value text-primary">156</div>
                             <div style="font-size: 0.85rem; color: #34d399; margin-top: 0.5rem;"><i
-                                    class="ph ph-trend-up"></i> +8.5% este mês</div>
+                                    class="ph ph-trend-up"></i> +12% vs. último mês</div>
                         </div>
 
-                        <div class="card">
-                            <div class="card-title"> Técnicos em Campo <i class="ph ph-users"
-                                    style="color: var(--role-tecnico);"></i></div>
-                            <div class="card-value text-primary">12 / 15</div>
-                            <div style="font-size: 0.85rem; color: var(--text-secondary); margin-top: 0.5rem;">3 em
-                                descanso/folga</div>
-                        </div>
-
-                        <div class="card">
-                            <div class="card-title"> Tempo Médio de Resposta <i class="ph ph-clock"
-                                    style="color: #fbbf24;"></i></div>
-                            <div class="card-value text-primary">4h 15m</div>
-                            <div style="font-size: 0.85rem; color: #fbbf24; margin-top: 0.5rem;"><i
-                                    class="ph ph-warning-circle"></i> Meta SLA: 4h</div>
+                        <div class="card" style="border-left: 4px solid #ef4444;">
+                            <div class="card-title"> Canceladas (Mês) <i class="ph ph-x-circle"
+                                    style="color: #ef4444;"></i></div>
+                            <div class="card-value text-primary">3</div>
+                            <div style="font-size: 0.85rem; color: var(--text-secondary); margin-top: 0.5rem;">Necessita
+                                revisão de SLA</div>
                         </div>
                     </div>
                 </div>
@@ -133,8 +143,17 @@
                     <div class="grid-cards">
                         <!-- Chart de MRR -->
                         <div class="card col-span-2" style="min-height: 400px; padding: 1.5rem;">
-                            <h3 style="margin-bottom: 1rem;">Evolução de MRR (Contratos de Manutenção PMOC)</h3>
+                            <h3 style="margin-bottom: 1rem;"><i class="ph ph-chart-line-up" style="color: #34d399;"></i>
+                                Evolução de MRR PMOC</h3>
                             <canvas id="mrrChart" style="width: 100%; max-height: 350px;"></canvas>
+                        </div>
+
+                        <!-- Chart de Clientes Ativos vs Inativos -->
+                        <div class="card col-span-2" style="min-height: 400px; padding: 1.5rem;">
+                            <h3 style="margin-bottom: 1rem;"><i class="ph ph-users"
+                                    style="color: var(--accent-blue-ice);"></i> Clientes da Base (Ativos vs Inativos)
+                            </h3>
+                            <canvas id="clientesChart" style="width: 100%; max-height: 350px;"></canvas>
                         </div>
                     </div>
                 </div>
@@ -264,6 +283,32 @@
                         scales: {
                             x: { grid: { color: gridColor }, ticks: { color: textColor } },
                             y: { grid: { color: gridColor }, ticks: { color: textColor } }
+                        }
+                    }
+                });
+            }
+
+            const ctxClientes = document.getElementById('clientesChart');
+            if (ctxClientes) {
+                new Chart(ctxClientes, {
+                    type: 'doughnut',
+                    data: {
+                        labels: ['Clientes Ativos', 'Clientes Inativos'],
+                        datasets: [{
+                            data: [280, 45],
+                            backgroundColor: ['#0ea5e9', '#ef4444'],
+                            borderColor: document.documentElement.getAttribute('data-theme') === 'dark' ? '#0f172a' : '#ffffff',
+                            borderWidth: 2
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            legend: {
+                                position: 'bottom',
+                                labels: { color: textColor }
+                            }
                         }
                     }
                 });

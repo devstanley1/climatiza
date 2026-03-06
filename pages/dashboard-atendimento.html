@@ -98,11 +98,12 @@
                 <!-- Conteúdo: Fila de Chamados -->
                 <div id="tab-fila" class="tab-content active">
                     <div
-                        style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem;">
+                        style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; flex-wrap: wrap; gap: 1rem;">
                         <input type="text" placeholder="Buscar OS..."
-                            style="background: var(--input-bg); border: 1px solid var(--input-border); padding: 0.75rem 1rem; border-radius: 8px; color: var(--text-primary); width: 300px;">
-                        <button class="btn-primary" style="width: auto; padding: 0.75rem 1.5rem;"><i
-                                class="ph ph-plus"></i> Nova OS</button>
+                            style="background: var(--input-bg); border: 1px solid var(--input-border); padding: 0.75rem 1rem; border-radius: 8px; color: var(--text-primary); width: 100%; max-width: 300px;">
+                        <button class="btn-primary"
+                            onclick="document.getElementById('modalNovaOS').style.display='flex'"
+                            style="width: auto; padding: 0.75rem 1.5rem;"><i class="ph ph-plus"></i> Nova OS</button>
                     </div>
 
                     <div class="card" style="padding: 0;">
@@ -150,9 +151,27 @@
 
                 <!-- Conteúdo: Clientes Ativos -->
                 <div id="tab-clientes" class="tab-content">
+                    <div
+                        style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; flex-wrap: wrap; gap: 1rem;">
+                        <input type="text" placeholder="Buscar Clientes..."
+                            style="background: var(--input-bg); border: 1px solid var(--input-border); padding: 0.75rem 1rem; border-radius: 8px; color: var(--text-primary); width: 100%; max-width: 300px;">
+                        <button class="btn-primary"
+                            onclick="document.getElementById('modalNovoCliente').style.display='flex'"
+                            style="width: auto; padding: 0.75rem 1.5rem; background: linear-gradient(135deg, var(--role-atendimento) 0%, var(--accent-blue-ice) 100%);"><i
+                                class="ph ph-user-plus"></i> Cadastrar Cliente</button>
+                    </div>
+
                     <div class="grid-cards">
-                        <div class="card">
-                            <div class="card-title">Empresa Cliente S/A</div>
+                        <div class="card" style="position: relative;">
+                            <div style="position: absolute; top: 1rem; right: 1rem; display: flex; gap: 0.5rem;">
+                                <button onclick="alert('Funcionalidade de Edição em Construção')"
+                                    style="background: transparent; border: none; color: var(--text-secondary); cursor: pointer;"><i
+                                        class="ph ph-pencil-simple line"></i></button>
+                                <button onclick="alert('Excluir Cliente?')"
+                                    style="background: transparent; border: none; color: #ef4444; cursor: pointer;"><i
+                                        class="ph ph-trash"></i></button>
+                            </div>
+                            <div class="card-title" style="padding-right: 3rem;">Empresa Cliente S/A</div>
                             <div style="font-size: 0.9rem; margin-bottom: 0.5rem; color: var(--text-secondary);"><i
                                     class="ph ph-phone"></i> (11) 99999-0000</div>
                             <div style="font-size: 0.9rem; margin-bottom: 1rem; color: var(--text-secondary);"><i
@@ -188,6 +207,82 @@
 
             </div>
         </main>
+    </div>
+
+    <!-- Modal Nova OS -->
+    <div id="modalNovaOS"
+        style="display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.7); z-index: 9999; justify-content: center; align-items: center; padding: 1rem;">
+        <div class="card glass-panel" style="width: 100%; max-width: 500px; animation: fadeIn 0.3s ease;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem;">
+                <h3 style="color: var(--role-atendimento);"><i class="ph ph-file-plus"></i> Abrir Nova OS</h3>
+                <button onclick="document.getElementById('modalNovaOS').style.display='none'"
+                    style="background: transparent; border: none; color: var(--text-secondary); font-size: 1.25rem; cursor: pointer;"><i
+                        class="ph ph-x"></i></button>
+            </div>
+            <form
+                onsubmit="event.preventDefault(); alert('Ordem de Serviço #1043 Gerada e Adicionada à Fila!'); this.reset(); document.getElementById('modalNovaOS').style.display='none';">
+                <div style="margin-bottom: 1rem;">
+                    <label
+                        style="display: block; margin-bottom: 0.5rem; font-size: 0.85rem; color: var(--text-secondary);">Cliente</label>
+                    <select
+                        style="width: 100%; background: var(--input-bg); border: 1px solid var(--input-border); color: var(--text-primary); padding: 0.75rem; border-radius: 8px;">
+                        <option>Selecione um Cliente Existente</option>
+                        <option>Empresa Cliente S/A</option>
+                        <option>Restaurante Sabor</option>
+                    </select>
+                </div>
+                <div style="margin-bottom: 1rem;">
+                    <label
+                        style="display: block; margin-bottom: 0.5rem; font-size: 0.85rem; color: var(--text-secondary);">Problema
+                        Relatado</label>
+                    <textarea required placeholder="Ex: Equipamento pingando água..." rows="3"
+                        style="width: 100%; background: var(--input-bg); border: 1px solid var(--input-border); padding: 0.75rem; border-radius: 8px; color: var(--text-primary); font-family: inherit; resize: vertical;"></textarea>
+                </div>
+                <button type="submit" class="btn-primary"
+                    style="background: linear-gradient(135deg, var(--role-atendimento) 0%, var(--accent-blue-ice) 100%);"><i
+                        class="ph ph-check-circle"></i> Criar Ordem</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Modal Novo Cliente -->
+    <div id="modalNovoCliente"
+        style="display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.7); z-index: 9999; justify-content: center; align-items: center; padding: 1rem;">
+        <div class="card glass-panel" style="width: 100%; max-width: 500px; animation: fadeIn 0.3s ease;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem;">
+                <h3 style="color: var(--role-atendimento);"><i class="ph ph-user-plus"></i> Cadastrar Cliente</h3>
+                <button onclick="document.getElementById('modalNovoCliente').style.display='none'"
+                    style="background: transparent; border: none; color: var(--text-secondary); font-size: 1.25rem; cursor: pointer;"><i
+                        class="ph ph-x"></i></button>
+            </div>
+            <form
+                onsubmit="event.preventDefault(); alert('Cliente Registrado com Sucesso!'); this.reset(); document.getElementById('modalNovoCliente').style.display='none'; document.querySelector('.tab-btn[data-tab=\'tab-clientes\']').click();">
+                <div style="margin-bottom: 1rem;">
+                    <label
+                        style="display: block; margin-bottom: 0.5rem; font-size: 0.85rem; color: var(--text-secondary);">Nome
+                        / Razão Social</label>
+                    <input type="text" required placeholder="Ex: GeloTech Corp"
+                        style="width: 100%; background: var(--input-bg); border: 1px solid var(--input-border); color: var(--text-primary); padding: 0.75rem; border-radius: 8px;">
+                </div>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1rem;">
+                    <div>
+                        <label
+                            style="display: block; margin-bottom: 0.5rem; font-size: 0.85rem; color: var(--text-secondary);">Telefone</label>
+                        <input type="tel" required placeholder="(00) 00000-0000"
+                            style="width: 100%; background: var(--input-bg); border: 1px solid var(--input-border); color: var(--text-primary); padding: 0.75rem; border-radius: 8px;">
+                    </div>
+                    <div>
+                        <label
+                            style="display: block; margin-bottom: 0.5rem; font-size: 0.85rem; color: var(--text-secondary);">E-mail</label>
+                        <input type="email" required placeholder="contato@empresa.com"
+                            style="width: 100%; background: var(--input-bg); border: 1px solid var(--input-border); color: var(--text-primary); padding: 0.75rem; border-radius: 8px;">
+                    </div>
+                </div>
+                <button type="submit" class="btn-primary"
+                    style="background: linear-gradient(135deg, var(--role-atendimento) 0%, var(--accent-blue-ice) 100%);"><i
+                        class="ph ph-floppy-disk"></i> Salvar Cliente</button>
+            </form>
+        </div>
     </div>
 
     <script src="../assets/js/menu.js"></script>

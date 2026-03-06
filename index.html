@@ -93,6 +93,28 @@
                 </div>
                 <button type="submit" class="btn-primary">Acessar Painel <i class="ph ph-sign-in"></i></button>
             </form>
+
+            <!-- Recuperação de Senha Form (Escondido) -->
+            <form class="login-form" id="recoveryForm" style="display: none;">
+                <h2>Recuperar Senha</h2>
+                <p class="subtitle">Insira o e-mail cadastrado para receber instruções de redefinição.</p>
+
+                <div class="input-group" style="margin-top: 2rem;">
+                    <label for="recoveryEmail" class="visually-hidden">E-mail</label>
+                    <div class="input-wrapper">
+                        <i class="ph ph-envelope"></i>
+                        <input type="email" id="recoveryEmail" placeholder="Seu E-mail"
+                            aria-label="E-mail de recuperação" required>
+                    </div>
+                </div>
+
+                <div class="form-actions" style="justify-content: center; margin-bottom: 2rem;">
+                    <a href="#" class="forgot-password" id="backToLogin"><i class="ph ph-arrow-left"></i> Voltar ao
+                        Login</a>
+                </div>
+                <button type="submit" class="btn-primary">Enviar Link de Recuperação <i
+                        class="ph ph-paper-plane-right"></i></button>
+            </form>
         </div>
     </div>
     <script src="assets/js/menu.js"></script>
